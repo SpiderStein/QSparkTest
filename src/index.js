@@ -19,6 +19,7 @@ function symmCipher(input, secret) {
 /**
  * @param {number[]} cipherText 
  * @param {number} secretLen 
+ * @returns {Map<string, number[]>}
  */
 function guessSecret(cipherText, secretLen) {
     const map = new Map()
@@ -64,3 +65,14 @@ function getScrtSuccessor(genSecret, secretLen) {
     }
     return genSecret
 }
+
+// let cipherText = symmCipher([24, 24, 26, 30, 28], 'aa')
+// const map = guessSecret(cipherText, 2)
+// map.forEach((plainText, secret) => {
+//     if (secret === 'yz') {
+//         console.log('check if the value matches')
+//     }
+// })
+
+var a = symmCipher(symmCipher([24, 24, 26, 30, 28], 'yz'), 'yz')
+console.log(a);
