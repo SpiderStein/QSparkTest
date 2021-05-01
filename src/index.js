@@ -28,14 +28,12 @@ function guessSecret(cipherText, secretLen) {
     while (genSecret !== lastGenScrt) {
         let plainText = symmCipher(cipherText, genSecret)
         plainText = String.fromCharCode(...plainText)
-        // map[genSecret] = plainText
         map.set(genSecret, plainText)
 
         genSecret = getScrtSuccessor(genSecret, secretLen)
     }
     let plainText = symmCipher(cipherText, genSecret)
     plainText = String.fromCharCode(...plainText)
-    // map[genSecret] = plainText
     map.set(genSecret, plainText)
 
     return map
@@ -74,10 +72,13 @@ function getScrtSuccessor(genSecret, secretLen) {
     return genSecret
 }
 
-let cipherText = symmCipher([24, 24, 26, 30, 28], 'aa')
+let cipherText = [0, 0, 0, 0]
 const map = guessSecret(cipherText, 2)
 map.forEach((plainText, secret) => {
-    if (secret == 'yz') {
-        console.log(plainText)
+    if (secret == 'aa') {
+        console.log(plainText[0]);
+        if (plainText[0] === 24) {
+            console.log('good');
+        }
     }
 })
