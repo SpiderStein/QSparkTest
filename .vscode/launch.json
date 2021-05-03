@@ -12,6 +12,19 @@
                 "<node_internals>/**"
             ],
             "program": "${file}"
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "crackMyPassowrd",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/services/crackMyPassword/index.js",
+            "env": {
+                "PORT": "5000",
+                "CLIENT_URL": "http://localhost:3000"
+            }
         }
     ]
 }
