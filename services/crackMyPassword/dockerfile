@@ -1,0 +1,8 @@
+FROM node:14.16.1-buster
+WORKDIR /app
+COPY /crackMyPassowrd/. ./crackMyPassowrd/
+COPY /node_modules/. ./node_modules/
+WORKDIR /app/crackMyPassowrd
+ENV asdasdsad
+EXPOSE 50000
+ENTRYPOINT [ "node", "/app/crackMyPassowrd/entrypoint.js"]
