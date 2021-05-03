@@ -5,7 +5,7 @@
  */
 async function run({ fastify, ...deps }) {
     fastify.register(require('fastify-cors'), {
-        origin: process.env.CLIENT_PORT
+        origin: process.env.CLIENT_URL
     })
     fastify.decorateRequest('crypto', deps.crypto)
     fastify.route(deps.ctrlFuncs.bruteForce)
