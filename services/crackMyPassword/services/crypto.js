@@ -19,7 +19,7 @@ function symmCipher(input, secret) {
 /**
  * @param {number[]} cipherText 
  * @param {number} secretLen 
- * @returns {Map<string, number[]>}
+ * @returns {Map<string, string>}
  */
 function guessSecret(cipherText, secretLen) {
     const map = new Map()

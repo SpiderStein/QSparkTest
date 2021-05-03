@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import './App.css';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import React, { Component } from 'react';
+import './App.css';
 
 const styles = {
   list: {
@@ -27,7 +27,7 @@ const styles = {
   },
   text: {
     width: 400,
-    
+
   },
   select: {
     width: 400
@@ -57,29 +57,30 @@ class App extends Component {
   }
 
   handleSubmit = () => {
-    fetch("http://localhost:5000/bruteforce/", {
+    fetch("http://localhost:5000/bruteforce", {
       method: 'post',
       body: JSON.stringify({
         text: this.state.text,
         size: this.state.size
-      })
+      }),
+      headers: new Headers({ 'content-type': 'application/json' })
     })
-    .then(res => res.json())
-    .then(
-      (result) => {
-        this.setState({
-          results: result
-        });
-      },
-      // Note: it's important to handle errors here
-      // instead of a catch() block so that we don't swallow
-      // exceptions from actual bugs in components.
-      (error) => {
-        this.setState({
-          error
-        });
-      }
-    )
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            results: result
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            error
+          });
+        }
+      )
   }
 
   render() {
@@ -93,7 +94,7 @@ class App extends Component {
           </Toolbar>
         </AppBar>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
-        <Grid className="App-header" styles={{width:'100%'}} container>
+        <Grid className="App-header" styles={{ width: '100%' }} container>
           <Grid item xs={12} className={this.props.classes.grid}>
             <TextField
               id="text"
@@ -132,16 +133,16 @@ class App extends Component {
 
           <Paper className={this.props.classes.paper}>
             <List>
-            <ListSubheader>Suggested decryptions</ListSubheader>
-            {
-              this.state.results.map((item, index) => (
-                <ListItem key={index}>
-                  <ListItemText>{item[0]} - {item[1]}</ListItemText>
-                </ListItem>
-              ))
-            }
-          </List>
-        </Paper>
+              <ListSubheader>Suggested decryptions</ListSubheader>
+              {
+                this.state.results.map((item, index) => (
+                  <ListItem key={index}>
+                    <ListItemText>{item[0]} - {item[1]}</ListItemText>
+                  </ListItem>
+                ))
+              }
+            </List>
+          </Paper>
         </Grid>
       </div>
     );

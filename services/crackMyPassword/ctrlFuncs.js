@@ -23,10 +23,11 @@ const bruteForce = {
     handler: async function (req, reply) {
         setImmediate(() => {
             try {
-                const scrtToPlaintext = req.crypto.guessSecret([...req.body.text], req.body.size)
+                const asciiEncodedText = [...req.body.text].map(char => char = char.charCodeAt())
+                const scrtToPlaintext = req.crypto.guessSecret(asciiEncodedText, req.body.size)
                 const res = []
                 scrtToPlaintext.forEach((txt, scrt) => {
-                    res.push([scrt, String.fromCharCode(txt)])
+                    res.push([scrt, txt])
                 })
                 reply.send(res)
             } catch (err) {
