@@ -1,0 +1,7 @@
+FROM node:14.16.1-buster
+WORKDIR /app
+COPY /. ./tester/
+WORKDIR /app/tester
+RUN npm i
+EXPOSE 3000
+ENTRYPOINT [ "npm", "start"]

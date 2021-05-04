@@ -1,8 +1,9 @@
 FROM node:14.16.1-buster
 WORKDIR /app
-COPY /crackMyPassowrd/. ./crackMyPassowrd/
-COPY /node_modules/. ./node_modules/
+COPY /. ./crackMyPassowrd/
 WORKDIR /app/crackMyPassowrd
-ENV asdasdsad
-EXPOSE 50000
-ENTRYPOINT [ "node", "/app/crackMyPassowrd/entrypoint.js"]
+RUN npm i
+ENV PORT="5000"
+ENV CLIENT_URL="http://localhost:3000"
+EXPOSE 5000
+ENTRYPOINT [ "node", "/app/crackMyPassowrd/index.js"]
