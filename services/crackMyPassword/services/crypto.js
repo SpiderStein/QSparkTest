@@ -26,7 +26,7 @@ function guessSecret(cipherText, secretLen) {
     let genSecret = _.pad('', secretLen, 'a')
     let lastGenScrt = _.pad('', secretLen, 'z')
     const isLowerCasedChar = encodedChar => {
-        return (encodedChar >= 97 && encodedChar <= 122)
+        return (encodedChar >= 32 && encodedChar <= 122)
     }
     while (genSecret !== lastGenScrt) {
         let plainText = symmCipher(cipherText, genSecret)
