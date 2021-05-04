@@ -25,16 +25,23 @@ function guessSecret(cipherText, secretLen) {
     const map = new Map()
     let genSecret = _.pad('', secretLen, 'a')
     let lastGenScrt = _.pad('', secretLen, 'z')
+    const isLowerCasedChar = encodedChar => {
+        return (encodedChar >= 97 && encodedChar <= 122)
+    }
     while (genSecret !== lastGenScrt) {
         let plainText = symmCipher(cipherText, genSecret)
-        plainText = String.fromCharCode(...plainText)
-        map.set(genSecret, plainText)
+        if (plainText.every(isLowerCasedChar)) {
+            plainText = String.fromCharCode(...plainText)
+            map.set(genSecret, plainText)
+        }
 
         genSecret = getScrtSuccessor(genSecret, secretLen)
     }
     let plainText = symmCipher(cipherText, genSecret)
-    plainText = String.fromCharCode(...plainText)
-    map.set(genSecret, plainText)
+    if (plainText.every(isLowerCasedChar)) {
+        plainText = String.fromCharCode(...plainText)
+        map.set(genSecret, plainText)
+    }
 
     return map
 }
